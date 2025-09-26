@@ -1,4 +1,4 @@
-# `ros2_cpp_template` package
+# `sze_a7r_akadalyelkerulo` package
 ROS 2 C++ package.  [![Static Badge](https://img.shields.io/badge/ROS_2-Humble-34aec5)](https://docs.ros.org/en/humble/)
 ## Packages and build
 
@@ -31,26 +31,3 @@ source ~/ros2_ws/install/setup.bash
 ``` r
 ros2 launch sze_a7r_akadalyelkerulo launch_example1.launch.py
 ```
-
-# Delete this part if you are using it as a template
-
-ROS 2 pacage template, to get started, use template by clicking on the Green button labeled [`Use this template`](https://github.com/Greg177/sze_a7r_akadalyelkerulo/generate) / [`Create new repository`](https://github.com/Greg177/sze_a7r_akadalyelkerulo/generate). 
-
-<p align="center"><img src="img/use_this_template01.png" width="60%" /></p>
-
-
-Let's assume 
-- your Github username is `mycoolusername`
-- your ROS 2 repo shold be `cool_ros2_package`
-
-Replace everything in the cloned repo:
-
-- `ros2_cpp_template` >> `cool_ros2_package` (the folder was already renamed after `Use this template`)
-- `sze-info` >> `mycoolusername`
-- find all `todo` strings and fill the blanks
-
-The easiest way is VS code:
-
-<p align="center"><img src="img/replace01.png" width="60%" /></p>
-
-Now `colcon build` your ROS 2 package and you can start wokring.
