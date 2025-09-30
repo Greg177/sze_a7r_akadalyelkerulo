@@ -24,6 +24,7 @@ colcon build --packages-select sze_a7r_akadalyelkerulo --symlink-install
 <summary> Don't forget to source before ROS commands.</summary>
 
 ``` bash
+source /opt/ros/humble/setup.bash
 source ~/ros2_ws/install/setup.bash
 ```
 </details>
