@@ -2,18 +2,19 @@
 Akadályelkerülő Robot (ROS2, Python)  [![Static Badge](https://img.shields.io/badge/ROS_2-Humble-34aec5)](https://docs.ros.org/en/humble/)
 ## Leírás és rövid bemutatás
 
-Ez a kis beadandó egy **autonóm akadályelkerülő rendszer szimulációja** ROS 2-ben, Python nyelven megvalósítva.  
-A projekt célja, hogy bemutassa a **publisher-subscriber kommunikációt**, és alapvető **robotvezérlési logikát** vizuális formában, a `turtlesim` csomag segítségével.
+Ez a kis beadandó egy **autonóm akadályelkerülő rendszer szimulációja** ROS 2-ben, Python nyelven megvalósítva, ahol a teknős akadályokat érzékelve automatikusan előre halad vagy balra/jobbra fordul, miközben nem hagyja el a szimulációs területet.  
+
 
 ---
 
 ## Funkcionalitás
 
-- A **Sensor Node** véletlenszerűen generál távolságméréseket (mintha ultrahangos szenzor lenne).
-- A **Controller Node** feldolgozza ezeket az értékeket:
-  - Ha a távolság nagyobb, mint 1 méter → **"Szabad út" → előre halad**
-  - Ha kisebb, mint 1 méter → **"Akadály észlelve" → megáll vagy elfordul**
-- A mozgás vizuálisan megjelenik a `turtlesim` ablakban.
+- A **Sensor Node** vagy a **Sim Sensor Node** folyamatosan generál távolságméréseket (mintha ultrahangos szenzor lenne).  
+- A **Controller Node** feldolgozza ezeket az értékeket és a teknős pozícióját:  
+  - **Szabad út**: nincs akadály a megadott távolságküszöb alatt → a teknős egyenesen halad.  
+  - **Akadály észlelve**: a távolság kisebb, mint a küszöb → a teknős egyszer balra vagy jobbra fordul, amíg szabad út nem található.  
+  - A falhoz vagy az ablak széléhez érve a teknős automatikusan elfordul, hogy ne hagyja el a szimulációs területet.  
+- A mozgás vizuálisan megjelenik a **TurtleSim** ablakban, és a logok jelzik az aktuális állapotot: előrehaladás, fordulás vagy akadály észlelése.
 
 ---
 
