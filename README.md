@@ -51,15 +51,15 @@ ros2 launch sze_a7r_akadalyelkerulo akadalyelkerulo.launch.py
 
 ```mermaid
 graph LR
-    A["Sensor Node"] -->|/distance · sensor_msgs/Range| C["Controller Node"]
-    B["Sim Sensor Node"] -->|/distance · sensor_msgs/Range| C
-    D["Akadalyelkerulo Node"] -->|/scan · sensor_msgs/LaserScan| C
-    E["TurtleSim Pose"] -->|/turtle1/pose · turtlesim/Pose| C
-    C -->|/turtle1/cmd_vel · geometry_msgs/Twist| F["TurtleSim (Robot Mozgatása)"]
+    A(["Sensor Node"]) -->|/distance · sensor_msgs/Range| C(["Controller Node"])
+    B(["Sim Sensor Node"]) -->|/distance · sensor_msgs/Range| C
+    D(["Akadalyelkerulo Node"]) -->|/scan · sensor_msgs/LaserScan| C
+    E(["TurtleSim Pose"]) -->|/turtle1/pose · turtlesim/Pose| C
+    C -->|/turtle1/cmd_vel · geometry_msgs/Twist| F(["TurtleSim (Robot Mozgatása)"])
 
     %% --- Stílusok ---
-    classDef light fill:#34aec5,stroke:#152742,stroke-width:2px,color:#152742
-    classDef red fill:#ef4638,stroke:#152742,stroke-width:2px,color:#fff
+    classDef light fill:#34aec5,stroke:#152742,stroke-width:2px,color:#152742,rx:10,ry:10
+    classDef red fill:#ef4638,stroke:#152742,stroke-width:2px,color:#fff,rx:10,ry:10
 
     class A,B,D,C red
     class F light
