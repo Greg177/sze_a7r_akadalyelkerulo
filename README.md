@@ -1,8 +1,21 @@
 # `sze_a7r_akadalyelkerulo` package
-ROS 2 C++ package.  [![Static Badge](https://img.shields.io/badge/ROS_2-Humble-34aec5)](https://docs.ros.org/en/humble/)
-## Packages and build
+Akadályelkerülő Robot (ROS2, Python)  [![Static Badge](https://img.shields.io/badge/ROS_2-Humble-34aec5)](https://docs.ros.org/en/humble/)
+## Leírás és rövid bemutatás
 
-It is assumed that the workspace is `~/ros2_ws/`.
+Ez a kis beadandó egy **autonóm akadályelkerülő rendszer szimulációja** ROS 2-ben, Python nyelven megvalósítva.  
+A projekt célja, hogy bemutassa a **publisher-subscriber kommunikációt**, és alapvető **robotvezérlési logikát** vizuális formában, a `turtlesim` csomag segítségével.
+
+---
+
+## Funkcionalitás
+
+- A **Sensor Node** véletlenszerűen generál távolságméréseket (mintha ultrahangos szenzor lenne).
+- A **Controller Node** feldolgozza ezeket az értékeket:
+  - Ha a távolság nagyobb, mint 1 méter → **"Szabad út" → előre halad**
+  - Ha kisebb, mint 1 méter → **"Akadály észlelve" → megáll vagy elfordul**
+- A mozgás vizuálisan megjelenik a `turtlesim` ablakban.
+
+---
 
 ### Clone the packages
 ``` r
