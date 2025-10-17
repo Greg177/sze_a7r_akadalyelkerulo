@@ -13,9 +13,9 @@ class SensorNode(Node):
     def publish_distance(self):
         msg = Range()
         msg.header.stamp = self.get_clock().now().to_msg()
-        msg.range = random.uniform(0.05, 2.0)  # 5 cm – 2 m között
+        msg.range = random.uniform(0.05, 2.0)  
         self.publisher_.publish(msg)
-        self.get_logger().info(f'💡 Távolság: {msg.range:.2f} m')
+        self.get_logger().info(f'Távolság: {msg.range:.2f} m')
 
 def main(args=None):
     rclpy.init(args=args)

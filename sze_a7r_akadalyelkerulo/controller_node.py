@@ -16,11 +16,11 @@ class ControllerNode(Node):
         if msg.range < 0.3:
             twist.linear.x = 0.0
             twist.angular.z = 0.5
-            self.get_logger().warn(f'🚧 Akadály észlelve ({msg.range:.2f} m) → Fordulás balra')
+            self.get_logger().warn(f'Akadály észlelve ({msg.range:.2f} m) → Fordulás balra')
         else:
             twist.linear.x = 0.2
             twist.angular.z = 0.0
-            self.get_logger().info(f'✅ Szabad út ({msg.range:.2f} m) → Előrehaladás')
+            self.get_logger().info(f'Szabad út ({msg.range:.2f} m) → Előrehaladás')
 
         self.publisher.publish(twist)
 
