@@ -52,5 +52,11 @@ A node-ok és topicok közötti adatáramlás a következő:
 
 ```mermaid
 graph LR
-    A[Szenzor Node] -->|/distance · std_msgs/Float32| B[Vezérlő Node]
-    B -->|/cmd_vel · geometry_msgs/Twist| C["Robot Mozgatása (Turtlesim)"]
+    %% Stílusdefiníciók
+    classDef sensor fill=#ff7b7b,stroke=#e65c5c,stroke-width:2px,color=white,font-weight:bold,rx:10,ry:10;
+    classDef controller fill=#7bb7ff,stroke=#5c8de6,stroke-width:2px,color=white,font-weight:bold,rx:10,ry:10;
+    classDef robot fill=#7bff91,stroke=#4be66c,stroke-width:2px,color=black,font-weight:bold,rx:10,ry:10;
+
+    %% Diagram elemek
+    A[Szenzor Node]:::sensor -->|/distance · std_msgs/Float32| B[Vezérlő Node]:::controller
+    B -->|/cmd_vel · geometry_msgs/Twist| C["Robot Mozgatása (Turtlesim)"]:::robot
