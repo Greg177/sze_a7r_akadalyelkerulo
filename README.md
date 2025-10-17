@@ -51,14 +51,17 @@ ros2 launch sze_a7r_akadalyelkerulo akadalyelkerulo.launch.py
 
 ```mermaid
 graph LR
-    A["Szenzor Node"] -->|/distance · std_msgs/Float32| B["Vezérlő Node"]
-    B -->|/cmd_vel · geometry_msgs/Twist| C["Robot Mozgatása (Turtlesim)"]
+    A["Sensor Node"] -->|/distance · sensor_msgs/Range| C["Controller Node"]
+    B["Sim Sensor Node"] -->|/distance · sensor_msgs/Range| C
+    D["Akadalyelkerulo Node"] -->|/scan · sensor_msgs/LaserScan| C
+    E["TurtleSim Pose"] -->|/turtle1/pose · turtlesim/Pose| C
+    C -->|/turtle1/cmd_vel · geometry_msgs/Twist| F["TurtleSim (Robot Mozgatása)"]
 
     %% --- Színek és stílusok (GitHub-kompatibilis) ---
     classDef sensor fill:#ff9999,stroke:#ff4d4d,color:#000,rx:10,ry:10,font-weight:bold;
     classDef controller fill:#99ccff,stroke:#4d94ff,color:#000,rx:10,ry:10,font-weight:bold;
     classDef robot fill:#99ffb3,stroke:#33cc66,color:#000,rx:10,ry:10,font-weight:bold;
 
-    class A sensor
-    class B controller
-    class C robot
+    class A,B,D sensor
+    class C controller
+    class F robot
