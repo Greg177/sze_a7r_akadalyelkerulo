@@ -53,11 +53,11 @@ graph LR
     A["Szenzor Node"] -->|/distance · std_msgs/Float32| B["Vezérlő Node"]
     B -->|/cmd_vel · geometry_msgs/Twist| C["Robot Mozgatása (Turtlesim)"]
 
-    %% GitHub-kompatibilis stílus
-    classDef red fill:#ff9999,stroke:#ff4d4d,color:#000,font-weight:bold;
-    classDef blue fill:#99ccff,stroke:#4d94ff,color:#000,font-weight:bold;
-    classDef green fill:#99ffb3,stroke:#33cc66,color:#000,font-weight:bold;
+    %% --- Színek és stílusok (GitHub-kompatibilis) ---
+    classDef sensor fill:#ff9999,stroke:#ff4d4d,color:#000,rx:10,ry:10,font-weight:bold;
+    classDef controller fill:#99ccff,stroke:#4d94ff,color:#000,rx:10,ry:10,font-weight:bold;
+    classDef robot fill:#99ffb3,stroke:#33cc66,color:#000,rx:10,ry:10,font-weight:bold;
 
-    class A red
-    class B blue
-    class C green
+    class A sensor
+    class B controller
+    class C robot
