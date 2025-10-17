@@ -10,7 +10,8 @@ class Akadalyelkerulo(Node):
         super().__init__('akadalyelkerulo')
 
         # Publisher a robot mozgására
-        self.cmd_pub = self.create_publisher(Twist, 'cmd_vel', 10)
+        self.cmd_pub = self.create_publisher(Twist, 'turtle1/cmd_vel', 10)
+
 
         # Subscriber a LiDAR adatokhoz
         self.scan_sub = self.create_subscription(
@@ -32,7 +33,7 @@ class Akadalyelkerulo(Node):
             twist.angular.z = 0.5 
             self.get_logger().info(f'Akadály észlelve: {min_distance:.2f} m, fordulás!')
         else:
-            twist.linear.x = 0.2
+            twist.linear.x = 0.5
             twist.angular.z = 0.0
             self.get_logger().info(f'Utó megtisztítva, haladás: {min_distance:.2f} m')
 
