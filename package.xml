@@ -2,14 +2,15 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>sze_a7r_akadalyelkerulo</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="szepgergo13@gmail.com">TODO:</maintainer>
+  <version>0.0.1</version>
+  <description>Egyszerű akadályelkerülő robot ROS2-höz</description>
+  <maintainer email="szepgergo13@gmail.com">Szép Gergő Krisztián</maintainer>
   <license>GNU General Public License v3.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <depend>rclcpp</depend>
-  <depend>std_msgs</depend>
+
+  <depend>rclpy</depend>
+  <depend>sensor_msgs</depend>
   <depend>geometry_msgs</depend>
   <exec_depend>ros2launch</exec_depend>
 
