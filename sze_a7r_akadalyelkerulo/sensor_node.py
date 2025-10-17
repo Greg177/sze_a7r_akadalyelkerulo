@@ -13,7 +13,7 @@ class SensorNode(Node):
     def publish_distance(self):
         msg = Range()
         msg.header.stamp = self.get_clock().now().to_msg()
-        msg.range = random.uniform(0.05, 2.0)  
+        msg.range = random.uniform(0.5, 3.0)  
         self.publisher_.publish(msg)
         self.get_logger().info(f'Távolság: {msg.range:.2f} m')
 

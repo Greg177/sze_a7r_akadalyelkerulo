@@ -22,7 +22,7 @@ class ControllerNode(Node):
         self.pose = None
 
         
-        self.min_distance = 0.3
+        self.min_distance = 0.8
         self.linear_speed = 0.5
         self.angular_speed = 1.0
         self.min_x, self.max_x = 0.5, 10.5

@@ -13,7 +13,7 @@ class SimSensor(Node):
     def timer_callback(self):
         msg = Range()
         
-        msg.range = 0.5 + 0.5 * math.sin(self.angle)
+        msg.range = 1.0 + 1.5 * math.sin(self.angle)
         self.angle += 0.1
         self.pub.publish(msg)
 
