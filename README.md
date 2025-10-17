@@ -52,11 +52,14 @@ A node-ok és topicok közötti adatáramlás a következő:
 
 ```mermaid
 graph LR
-    %% Stílusdefiníciók
-    classDef sensor fill=#ff7b7b,stroke=#e65c5c,stroke-width:2px,color=white,font-weight:bold,rx:10,ry:10;
-    classDef controller fill=#7bb7ff,stroke=#5c8de6,stroke-width:2px,color=white,font-weight:bold,rx:10,ry:10;
-    classDef robot fill=#7bff91,stroke=#4be66c,stroke-width:2px,color=black,font-weight:bold,rx:10,ry:10;
+    A["Szenzor Node"] -->|/distance · std_msgs/Float32| B["Vezérlő Node"]
+    B -->|/cmd_vel · geometry_msgs/Twist| C["Robot Mozgatása (Turtlesim)"]
 
-    %% Diagram elemek
-    A[Szenzor Node]:::sensor -->|/distance · std_msgs/Float32| B[Vezérlő Node]:::controller
-    B -->|/cmd_vel · geometry_msgs/Twist| C["Robot Mozgatása (Turtlesim)"]:::robot
+    %% GitHub-kompatibilis stílus
+    classDef red fill:#ff9999,stroke:#ff4d4d,color:#000,font-weight:bold;
+    classDef blue fill:#99ccff,stroke:#4d94ff,color:#000,font-weight:bold;
+    classDef green fill:#99ffb3,stroke:#33cc66,color:#000,font-weight:bold;
+
+    class A red
+    class B blue
+    class C green
