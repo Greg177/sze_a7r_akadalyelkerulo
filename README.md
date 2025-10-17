@@ -57,11 +57,9 @@ graph LR
     E["TurtleSim Pose"] -->|/turtle1/pose · turtlesim/Pose| C
     C -->|/turtle1/cmd_vel · geometry_msgs/Twist| F["TurtleSim (Robot Mozgatása)"]
 
-    %% --- Színek és stílusok (GitHub-kompatibilis) ---
-    classDef sensor fill:#ff9999,stroke:#ff4d4d,color:#000,rx:10,ry:10,font-weight:bold;
-    classDef controller fill:#99ccff,stroke:#4d94ff,color:#000,rx:10,ry:10,font-weight:bold;
-    classDef robot fill:#99ffb3,stroke:#33cc66,color:#000,rx:10,ry:10,font-weight:bold;
+    %% --- Stílusok ---
+    classDef light fill:#34aec5,stroke:#152742,stroke-width:2px,color:#152742
+    classDef red fill:#ef4638,stroke:#152742,stroke-width:2px,color:#fff
 
-    class A,B,D sensor
-    class C controller
-    class F robot
+    class A,B,D,C red
+    class F light
