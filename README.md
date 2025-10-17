@@ -43,7 +43,7 @@ source ~/ros2_ws/install/setup.bash
 </details>
 
 ``` r
-ros2 launch sze_a7r_akadalyelkerulo launch_example1.launch.py
+ros2 launch sze_a7r_akadalyelkerulo akadalyelkerulo.launch.py
 ```
 
 ## Kommunikációs diagramm

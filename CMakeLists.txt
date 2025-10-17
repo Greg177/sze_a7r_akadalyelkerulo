@@ -11,8 +11,15 @@ find_package(sensor_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
 install(
-  DIRECTORY launch sze_a7r_akadalyelkerulo
-  DESTINATION share/${PROJECT_NAME}
+  PROGRAMS
+    sze_a7r_akadalyelkerulo/akadalyelkerulo.py
+  DESTINATION lib/${PROJECT_NAME}
+  RENAME akadalyelkerulo
+)
+
+install(
+  DIRECTORY launch
+  DESTINATION share/${PROJECT_NAME}/launch
 )
 
 ament_package()
