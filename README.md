@@ -45,3 +45,12 @@ source ~/ros2_ws/install/setup.bash
 ``` r
 ros2 launch sze_a7r_akadalyelkerulo launch_example1.launch.py
 ```
+
+## Kommunikációs diagramm
+
+A node-ok és topicok közötti adatáramlás a következő:
+
+```mermaid
+graph LR
+    A[Szenzor Node] -->|/distance<br>std_msgs/Float32| B[Vezérlő Node]
+    B -->|/cmd_vel<br>geometry_msgs/Twist| C[Robot Mozgatása (Turtlesim)]
