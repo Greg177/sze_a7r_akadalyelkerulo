@@ -48,8 +48,6 @@ ros2 launch sze_a7r_akadalyelkerulo launch_example1.launch.py
 
 ## Kommunikációs diagramm
 
-A node-ok és topicok közötti adatáramlás a következő:
-
 ```mermaid
 graph LR
     A["Szenzor Node"] -->|/distance · std_msgs/Float32| B["Vezérlő Node"]
