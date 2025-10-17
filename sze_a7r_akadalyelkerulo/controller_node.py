@@ -9,12 +9,24 @@ class ControllerNode(Node):
     def __init__(self):
         super().__init__('controller_node')
 
-        self.subscriber = self.create_subscription(Range, 'distance', self.distance_callback, 10)
-        self.pose_sub = self.create_subscription(Pose, 'turtle1/pose', self.pose_callback, 10)
-        self.publisher = self.create_publisher(Twist, 'turtle1/cmd_vel', 10)
+        # Subscribers
+        self.sub_distance = self.create_subscription(Range, 'distance', self.distance_callback, 10)
+        self.sub_pose = self.create_subscription(Pose, 'turtle1/pose', self.pose_callback, 10)
 
-        self.turning_direction = 0
+        # Publisher
+        self.pub_cmd = self.create_publisher(Twist, 'turtle1/cmd_vel', 10)
+
+        
+        self.state = "forward"          
+        self.turning_direction = 0      
         self.pose = None
+
+        
+        self.min_distance = 0.3
+        self.linear_speed = 0.5
+        self.angular_speed = 1.0
+        self.min_x, self.max_x = 0.5, 10.5
+        self.min_y, self.max_y = 0.5, 10.5
 
         self.get_logger().info('Vezérlő node elindult.')
 
@@ -22,48 +34,57 @@ class ControllerNode(Node):
         self.pose = msg
 
     def distance_callback(self, msg):
-        twist = Twist()
-
         if self.pose is None:
             return
 
+        twist = Twist()
 
-        min_x, max_x = 0.5, 10.5
-        min_y, max_y = 0.5, 10.5
+        
+        if self.pose.x <= self.min_x:
+            self.state = "turning"
+            self.turning_direction = 1
+        elif self.pose.x >= self.max_x:
+            self.state = "turning"
+            self.turning_direction = -1
+        if self.pose.y <= self.min_y:
+            self.state = "turning"
+            self.turning_direction = 1
+        elif self.pose.y >= self.max_y:
+            self.state = "turning"
+            self.turning_direction = -1
 
-
-        if msg.range < 0.3:
-            twist.linear.x = 0.0
-
-            if self.turning_direction == 0:
+        
+        if self.state == "forward":
+            if msg.range < self.min_distance:
+                
+                self.state = "turning"
                 self.turning_direction = 1 if random.random() < 0.5 else -1
+                twist.linear.x = 0.0
+                twist.angular.z = self.angular_speed * self.turning_direction
+                dir_str = "balra" if self.turning_direction == 1 else "jobbra"
+                self.get_logger().warn(f'Akadály észlelve ({msg.range:.2f} m) → Fordulás {dir_str}')
+            else:
+                
+                twist.linear.x = self.linear_speed
+                twist.angular.z = 0.0
+                self.get_logger().info(f'Szabad út ({msg.range:.2f} m) → Előrehaladás')
 
-            twist.angular.z = 1.0 * self.turning_direction
-            direction_str = 'balra' if self.turning_direction == 1 else 'jobbra'
-            self.get_logger().warn(f'Akadály észlelve ({msg.range:.2f} m) → Fordulás {direction_str}')
+        elif self.state == "turning":
+            if msg.range >= self.min_distance:
+                
+                self.state = "forward"
+                twist.linear.x = self.linear_speed
+                twist.angular.z = 0.0
+                self.get_logger().info(f'Út megtalálva ({msg.range:.2f} m) → Egyenesen haladás')
+            else:
+                
+                twist.linear.x = 0.0
+                twist.angular.z = self.angular_speed * self.turning_direction
+                dir_str = "balra" if self.turning_direction == 1 else "jobbra"
+                self.get_logger().warn(f'Fordulás {dir_str} az akadály miatt ({msg.range:.2f} m)')
 
-        else:
-            twist.linear.x = 0.5
-            twist.angular.z = 0.0
-            self.turning_direction = 0
-            self.get_logger().info(f'Szabad út ({msg.range:.2f} m) → Előrehaladás')
-
-
-        if self.pose.x < min_x:
-            twist.linear.x = 0.0
-            twist.angular.z = 1.0
-        elif self.pose.x > max_x:
-            twist.linear.x = 0.0
-            twist.angular.z = -1.0
-        if self.pose.y < min_y:
-            twist.linear.x = 0.0
-            twist.angular.z = 1.0
-        elif self.pose.y > max_y:
-            twist.linear.x = 0.0
-            twist.angular.z = -1.0
-
-        self.publisher.publish(twist)
-
+        
+        self.pub_cmd.publish(twist)
 
 def main(args=None):
     rclpy.init(args=args)
@@ -71,7 +92,6 @@ def main(args=None):
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
-
 
 if __name__ == '__main__':
     main()
